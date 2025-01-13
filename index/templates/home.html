@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Доширак|Главная</title>
+</head>
+<body>
+<h1>Магазин компьютерных девайсов "Доширак"</h1>
+<hr>
+{% for i in products %}
+<p>{{ i.pr_name }}</p>
+<br>
+{% endfor %}
+</body>
+</html>
