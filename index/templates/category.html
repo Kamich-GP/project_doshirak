@@ -17,8 +17,14 @@
         <li class="nav-item"><a href="#" class="nav-link">Войти</a></li>
       </ul>
 </header>
+<h1>Товары по категории {{ category }}</h1>
+<hr>
 {% for p in products %}
-<a href="/product/{{ p.id }}">{{ p.pr_name }}</a>
+<div class="container">
+    <img src="{{ p.pr_photo.url }}" alt="" width="350" height="350">
+    <a href="/product/{{ p.id }}">{{ p.pr_name }}</a>
+    <hr>
+</div>
 <br>
 {% endfor %}
 </body>

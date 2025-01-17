@@ -17,12 +17,23 @@
         <li class="nav-item"><a href="#" class="nav-link">Войти</a></li>
       </ul>
 </header>
-<h2>{{ product.pr_name }}</h2>
-<hr>
-<p>Описание: {{ product.pr_des }}</p>
-<p>Количество на складе: {{ product.pr_count }}</p>
-<p>Цена: ${{ product.pr_price }}</p>
-<br>
-<a href="/category/{{ product.pr_category.id }}">{{ product.pr_category }}</a>
+<div class="container d-flex 100">
+    <div class="container col-xxl-15 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{{ product.pr_photo.url }}" class="d-block mx-lg-auto img-fluid" alt="" width="500" height="300" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">{{ product.pr_name }}</h1>
+        <p class="lead">{{ product.pr_des }}</p>
+        <p class="lead">Категория: <a href="/category/{{ product.pr_category.id }}">{{ product.pr_category }}</a></p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Купить</button>
+          <button type="button" class="btn btn-outline-secondary btn-lg px-4">${{ product.pr_price }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

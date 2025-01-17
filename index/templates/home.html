@@ -40,7 +40,7 @@
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         {% for p in products %}
       <div class="feature col">
-          <img src="{{ p.pr_photo.url }}" alt="" width="250" height="250">
+          <a href="/product/{{ p.id }}"><img src="{{ p.pr_photo.url }}" alt="" width="250" height="250"></a>
           <h2>{{ p.pr_name }}</h2>
           <p>{{ p.pr_des }}</p>
           <a href="/product/{{ p.id }}" class="icon-link">
