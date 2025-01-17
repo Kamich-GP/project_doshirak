@@ -17,7 +17,7 @@
         <li class="nav-item"><a href="#" class="nav-link">Войти</a></li>
       </ul>
 </header>
-<div class="container d-flex 100">
+<div class="container d-flex w-100">
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <span class="fs-4">Категории</span>
@@ -40,11 +40,12 @@
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
         {% for p in products %}
       <div class="feature col">
-        <h2>{{ p.pr_name }}</h2>
-        <p>{{ p.pr_des }}</p>
-        <a href="/product/{{ p.id }}" class="icon-link">
-          Подробнее >
-        </a>
+          <img src="{{ p.pr_photo.url }}" alt="" width="250" height="250">
+          <h2>{{ p.pr_name }}</h2>
+          <p>{{ p.pr_des }}</p>
+          <a href="/product/{{ p.id }}" class="icon-link">
+            Подробнее >
+          </a>
       </div>
         {% endfor %}
     </div>
