@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Product, Category
+from .forms import RegForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout
+from django.views import View
 
 
 # Create your views here.
@@ -33,4 +37,42 @@ def product_page(request, pk):
     context = {'product': product}
 
     return render(request, 'product.html', context)
+
+
+# Регистрация
+class Register(View):
+    template_name = 'registration/register.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+    def post(self, request):
+        form = request.POST
+
+        if form:
+            username = form.get('username')
+            email = form.get('email')
+            password = form.get('password2')
+
+            user = User.objects.create_user(username=username,
+                                            email=email,
+                                            password=password).save()
+            login(request, user)
+            return redirect('/')
+
+
+def search_product(request):
+    if request.method == 'POST':
+        get_product = request.POST.get('search_product')
+
+        searched_product = Product.objects.filter(pr_name__iregex=get_product)
+
+        if searched_product:
+            context = {'products': searched_product}
+
+            return render(request, 'result.html', context)
+        else:
+            return redirect('/')
+
 
