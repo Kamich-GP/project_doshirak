@@ -10,11 +10,19 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-4">Магазин компьютерных девайсов "Доширак"</span>
       </a>
-
+    <form action="/search" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Поиск товара" name="search_product">
+    </form>
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
-        <li class="nav-item"><a href="/register" class="nav-link">Регистрация</a></li>
-        <li class="nav-item"><a href="/accounts/login" class="nav-link">Войти</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a href="/cart" class="nav-link">Корзина</a></li>
+          <li class="nav-item"><a href="/logout" class="nav-link">Выйти</a></li>
+          {% else %}
+          <li class="nav-item"><a href="/register" class="nav-link">Регистрация</a></li>
+          <li class="nav-item"><a href="/accounts/login" class="nav-link">Войти</a></li>
+          {% endif %}
       </ul>
 </header>
 <div class="container d-flex w-100">

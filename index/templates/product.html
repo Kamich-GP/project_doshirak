@@ -10,11 +10,19 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-4">Магазин компьютерных девайсов "Доширак"</span>
       </a>
-
+        <form action="/search" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Поиск товара" name="search_product">
+        </form>
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/" class="nav-link">Главная</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Регистрация</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Войти</a></li>
+        <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Главная</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a href="/cart" class="nav-link">Корзина</a></li>
+          <li class="nav-item"><a href="/logout" class="nav-link">Выйти</a></li>
+          {% else %}
+          <li class="nav-item"><a href="/register" class="nav-link">Регистрация</a></li>
+          <li class="nav-item"><a href="/accounts/login" class="nav-link">Войти</a></li>
+          {% endif %}
       </ul>
 </header>
 <div class="container d-flex 100">
@@ -28,7 +36,15 @@
         <p class="lead">{{ product.pr_des }}</p>
         <p class="lead">Категория: <a href="/category/{{ product.pr_category.id }}">{{ product.pr_category }}</a></p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Купить</button>
+            {% if user.is_authenticated %}
+            <form action="/to-cart/{{ product.id }}" method="post">
+                {% csrf_token %}
+                <input type="number" min="1" placeholder="Количество товара" name="pr_count">
+                <button type="submit" class="btn btn-primary btn-lg px-4 me-md-2">Добавить в корзину</button>
+            </form>
+            {% else %}
+            <p class="lead">Зарегистрируйтесь или войдите, чтобы приобрести товар!</p>
+            {% endif %}
           <button type="button" class="btn btn-outline-secondary btn-lg px-4">${{ product.pr_price }}</button>
         </div>
       </div>
