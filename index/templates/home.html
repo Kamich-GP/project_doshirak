@@ -10,10 +10,10 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-4">Магазин компьютерных девайсов "Доширак"</span>
       </a>
-    <form action="/search" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="Поиск товара" name="search_product">
-    </form>
+        <form method="post" action="/search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          {% csrf_token %}
+          <input type="search" class="form-control form-control-dark" placeholder="Поиск по товару" name="search_product" aria-label="Search">
+        </form>
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Главная</a></li>
           {% if user.is_authenticated %}

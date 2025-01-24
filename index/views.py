@@ -49,16 +49,17 @@ class Register(View):
     template_name = 'registration/register.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        context = {'form': RegForm}
+        return render(request, self.template_name, context)
 
 
     def post(self, request):
-        form = request.POST
+        form = RegForm(request.POST)
 
         if form:
-            username = form.get('username')
-            email = form.get('email')
-            password = form.get('password2')
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password2')
 
             user = User.objects.create_user(username=username,
                                             email=email,

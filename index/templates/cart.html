@@ -10,9 +10,9 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <span class="fs-4">Магазин компьютерных девайсов "Доширак"</span>
       </a>
-      <form action="/search" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="Поиск товара" name="search_product">
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="post" action="/search">
+          {% csrf_token %}
+          <input type="search" class="form-control form-control-dark" placeholder="Поиск по товару" name="search_product" aria-label="Search">
       </form>
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Главная</a></li>
@@ -27,13 +27,13 @@
 </header>
 <div class="container">
   {% for item in cart %}
-  <img src="{{ item.user_product.pr_photo.url }}" alt="">
+  <img src="{{ item.user_product.pr_photo.url }}" alt="" width="250" height="250">
   <br>
   <h2>{{ item.user_product }}</h2>
   <br>
-  <h3>{{ item.user_pr_count }}</h3>
+  <h3>Количество: {{ item.user_pr_count }}</h3>
   <br>
-  <p>${% widthratio item.user_product.pr_price 1 item.user_pr_count %}</p>
+  <p>Сумма за товары: ${% widthratio item.user_product.pr_price 1 item.user_pr_count %}</p>
   <br>
   <form action="/del-from-cart/{{ item.user_product.id }}" method="post">
     {% csrf_token %}
